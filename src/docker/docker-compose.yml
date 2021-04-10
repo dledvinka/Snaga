@@ -1,0 +1,56 @@
+version: "3"
+
+# https://minecraft.fandom.com/wiki/Server.properties#Bedrock_Edition_3
+# https://hub.docker.com/r/itzg/minecraft-bedrock-server
+# https://docs.fuga.cloud/how-to-install-portainer-docker-ui-manager-on-ubuntu-20.04-18.04-16.04
+
+services:
+  w01-mc:
+    container_name: 'w01-minecraft-bedrock-server'
+    image: itzg/minecraft-bedrock-server
+    restart: 'unless-stopped'
+    ports:
+      - 20001:19132/udp
+    environment:
+      EULA: 'TRUE'
+      MOTD: 'W01 - Eli Minecraft creative peaceful'
+      LEVEL_NAME: 'W01 - Husky'
+      DIFFICULTY: 'peaceful'
+      GAMEMODE: 'creative'
+      # SERVER CONFIG
+      MEMORY: '2G'
+    volumes:
+      - w01_mc_data:/data
+
+  w02-mc:
+    container_name: 'w02-minecraft-bedrock-server'
+    image: itzg/minecraft-bedrock-server
+    restart: 'unless-stopped'
+    ports:
+      - 20002:19132/udp
+    environment:
+      EULA: 'TRUE'
+      MOTD: 'W02 - Eli Minecraft creative peaceful'
+      LEVEL_NAME: 'W02 - Husky'
+      DIFFICULTY: 'peaceful'
+      GAMEMODE: 'survival'
+      # SERVER CONFIG
+      MEMORY: '2G'
+    volumes:
+      - w02_mc_data:/data
+
+  portainer:
+    container_name: 'portainer'
+    image: portainer/portainer
+    restart: 'always'
+    ports:
+      - 8000:8000
+      - 9000:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+
+volumes:
+  w01_mc_data: {}
+  w02_mc_data: {}
+  portainer_data: {}
