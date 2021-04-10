@@ -20,7 +20,7 @@ services:
       # SERVER CONFIG
       MEMORY: '2G'
     volumes:
-      - w01_mc_data:/data
+      - w01_data:/data
 
   w02-mc:
     container_name: 'w02-minecraft-bedrock-server'
@@ -37,8 +37,8 @@ services:
       # SERVER CONFIG
       MEMORY: '2G'
     volumes:
-      - w02_mc_data:/data
+      - w02_data:/data
 
 volumes:
-  w01_mc_data: {}
-  w02_mc_data: {}
+  w01_data: {}
+  w02_data: {}

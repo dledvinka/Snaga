@@ -2,16 +2,18 @@ version: "3.9"
 
 services:
   keyckloak-db:
+    container_name: postgres
     image: postgres:13.2
     restart: always
     environment:
+      POSTGRES_DB: keycloak
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: heslo123
     volumes:
-      keyckloak_db_data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
 
   keyckloak-db-adminer:
-    image: adminer
+    image: adminer:4.8.0
     restart: always
     ports:
       - 10101:8080
@@ -20,12 +22,13 @@ services:
     image: jboss/keycloak:12.0.4
     restart: always
     environment: 
+      DB_ADDR: postgres
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: heslo123
       DB_USER: admin
       DB_PASSWORD: heslo123
     ports:
-      - 10102:8080
+      - 10000:8080
 
 
   # docker run -d --name postgres --net keycloak-network -e POSTGRES_DB=keycloak -e POSTGRES_USER=keycloak 
@@ -35,4 +38,4 @@ services:
   #-e DB_USER=keycloak -e DB_PASSWORD=password
 
 volumes:
-  keyckloak_db_data: {}
+  db_data: {}
