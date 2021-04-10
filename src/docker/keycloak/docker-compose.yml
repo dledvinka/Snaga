@@ -6,7 +6,7 @@ services:
     restart: always
     environment:
       POSTGRES_USER: admin
-      POSTGRES_PASSWORD: kokos123
+      POSTGRES_PASSWORD: heslo123
     volumes:
       keyckloak_db_data:/var/lib/postgresql/data
 
@@ -21,9 +21,9 @@ services:
     restart: always
     environment: 
       KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: kokos123
+      KEYCLOAK_PASSWORD: heslo123
       DB_USER: admin
-      DB_PASSWORD: kokos123
+      DB_PASSWORD: heslo123
     ports:
       - 10102:8080
 
