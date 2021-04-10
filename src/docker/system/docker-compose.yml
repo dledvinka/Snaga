@@ -1,0 +1,20 @@
+version: "3.9"
+
+# https://minecraft.fandom.com/wiki/Server.properties#Bedrock_Edition_3
+# https://hub.docker.com/r/itzg/minecraft-bedrock-server
+# https://docs.fuga.cloud/how-to-install-portainer-docker-ui-manager-on-ubuntu-20.04-18.04-16.04
+
+services:
+  portainer:
+    container_name: 'portainer'
+    image: portainer/portainer-ce:2.1.1-alpine
+    restart: 'always'
+    ports:
+      - 8000:8000
+      - 9000:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+  
+volumes:
+  portainer_data: {}
